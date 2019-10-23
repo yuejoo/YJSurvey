@@ -28,6 +28,7 @@
 		77ECDEFE2360484E0089BCA1 /* MarkedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77ECDEFD2360484E0089BCA1 /* MarkedTextField.swift */; };
 		77ECDF0023604D4B0089BCA1 /* QuestionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77ECDEFF23604D4B0089BCA1 /* QuestionSheetView.swift */; };
 		77ECDF0223606CE60089BCA1 /* QuizCreationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77ECDF0123606CE60089BCA1 /* QuizCreationManager.swift */; };
+		77ECDF0423608F5B0089BCA1 /* EndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77ECDF0323608F5B0089BCA1 /* EndView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		77ECDEFD2360484E0089BCA1 /* MarkedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedTextField.swift; sourceTree = "<group>"; };
 		77ECDEFF23604D4B0089BCA1 /* QuestionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSheetView.swift; sourceTree = "<group>"; };
 		77ECDF0123606CE60089BCA1 /* QuizCreationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCreationManager.swift; sourceTree = "<group>"; };
+		77ECDF0323608F5B0089BCA1 /* EndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 				77ECDEFB2360428B0089BCA1 /* CandidateContextView.swift */,
 				77ECDEFD2360484E0089BCA1 /* MarkedTextField.swift */,
 				77ECDEFF23604D4B0089BCA1 /* QuestionSheetView.swift */,
+				77ECDF0323608F5B0089BCA1 /* EndView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			files = (
 				77ECDEB6235D851A0089BCA1 /* AppDelegate.swift in Sources */,
 				77ECDEFA236041E90089BCA1 /* ObservableArray.swift in Sources */,
+				77ECDF0423608F5B0089BCA1 /* EndView.swift in Sources */,
 				77ECDEF623603D6E0089BCA1 /* QuestionContext.swift in Sources */,
 				77ECDEEB236034610089BCA1 /* QuestionType.swift in Sources */,
 				77ECDEF8236041310089BCA1 /* QuestionSheetManager.swift in Sources */,

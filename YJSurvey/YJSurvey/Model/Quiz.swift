@@ -14,7 +14,7 @@ class Quiz {
     public var questions: [Question]
     public var candidates: [Candidate]
     public var questionHead: Question
-    
+
     required init(
         title: String,
         details: String,

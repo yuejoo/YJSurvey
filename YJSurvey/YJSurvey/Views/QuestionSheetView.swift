@@ -8,6 +8,18 @@
 
 import SwiftUI
 
+func printAnswers(answer: Answer?) {
+    var head : Answer? = answer
+    while head?.prev != nil {
+        head = head!.prev
+    }
+    
+    while head?.next != nil {
+        print(head!.question.context + " " + head!.selectedCandidates[0].context)
+        head = head!.next
+    }
+    
+}
 
 struct BottomBarView: View {
     @ObservedObject var questionSheetManager: QuestionSheetManager
@@ -50,11 +62,12 @@ struct BottomBarView: View {
             self.questionSheetManager.questionContext = QuestionContext(context: nextQuestion.context)
             self.questionSheetManager.questionType = nextQuestion.type
             self.questionSheetManager.candidates = ObservableArray<Candidate>(array: nextQuestion.candidates)
-            self.questionSheetManager.selectedCandidates = ObservableArray<Candidate>(array: self.questionSheetManager.answer!.selectedCandidates)
 
             // Create Answer for the next question
-            if self.questionSheetManager.answer?.next != nil {
+            // Check if the nextQuestion has already been answered
+            if self.questionSheetManager.answer?.next != nil && self.questionSheetManager.answer?.next?.question.id == nextQuestion.id {
                 self.questionSheetManager.answer = self.questionSheetManager.answer!.next
+                self.questionSheetManager.selectedCandidates = ObservableArray<Candidate>(array: self.questionSheetManager.answer!.selectedCandidates)
             }
             else {
                 self.questionSheetManager.selectedCandidates = ObservableArray<Candidate>(array: [])
@@ -63,6 +76,7 @@ struct BottomBarView: View {
                 emptyAnswer.prev = self.questionSheetManager.answer!
                 self.questionSheetManager.answer = emptyAnswer
             }
+            printAnswers(answer: self.questionSheetManager.answer)
         }
     }
     
@@ -78,12 +92,17 @@ struct BottomBarView: View {
             &&
             (self.questionSheetManager.answer?.next != nil
             ||
-            self.questionSheetManager.answer!.selectedCandidates.count > 0)
+            (self.questionSheetManager.answer!.selectedCandidates.count > 0
+                &&
+                self.questionSheetManager.answer!.selectedCandidates[0].nextQuestion != nil
+            ))
     }
 }
 
 struct QuestionSheetView: View {
     @ObservedObject var questionSheetManager: QuestionSheetManager
+    @State var textField: String = ""
+
     var headQuestion : Question
 
     var body: some View {
@@ -92,15 +111,39 @@ struct QuestionSheetView: View {
             QuestionContextView(
                 questionContext: self.questionSheetManager.questionContext
             )
-            ForEach(self.questionSheetManager.candidates.array, id:\.self){
-                candidate in CandidatesContextView(
-                    candidate: candidate,
-                    questionType: self.questionSheetManager.questionType,
-                    isSelected: self.isSelected(candidate)
-                ).padding(.leading).padding(.trailing)
-                .onTapGesture {
-                    self.selectionTapped(candidate)
+            // SelectionView
+            if questionSheetManager.questionType == QuestionType.SingleSelection {
+                ForEach(self.questionSheetManager.candidates.array, id:\.self){
+                    candidate in CandidatesContextView(
+                        candidate: candidate,
+                        questionType: self.questionSheetManager.questionType,
+                        isSelected: self.isSelected(candidate)
+                    ).padding(.leading).padding(.trailing)
+                        .onTapGesture {
+                            self.selectionTapped(candidate)
+                    }
                 }
+            }
+            // TextFieldView
+            if questionSheetManager.questionType == QuestionType.TextField {
+                ZStack {
+                    Rectangle()
+                        .shadow(radius: 2)
+                        .frame(height: 60)
+                        .foregroundColor(Color.white)
+                    TextField("", text: $textField){
+                        let candidate = self.questionSheetManager.candidates.array[0]
+                        candidate.context = self.textField
+                        self.questionSheetManager.selectedCandidates = ObservableArray<Candidate>(
+                            array: [candidate]
+                        )
+                        self.updateAnswer()
+                    }.padding()
+               }
+            }
+            
+            if questionSheetManager.questionType == QuestionType.End {
+                EndView()
             }
             Spacer()
             BottomBarView(questionSheetManager: self.questionSheetManager)
@@ -119,11 +162,10 @@ struct QuestionSheetView: View {
     func selectionTapped(_ candidate: Candidate) {
         if !isSelected(candidate) {
             if self.questionSheetManager.questionType == QuestionType.SingleSelection {
-                
+    
                 self.questionSheetManager.selectedCandidates = ObservableArray<Candidate>(
                     array: [candidate]
                 )
-                
                 updateAnswer()
             }
         }

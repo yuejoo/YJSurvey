@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import Combine
 
-class Candidate {
-    public let context: String
+class Candidate : ObservableObject {
+    @Published public var context: String
     public let id: Int
     public var nextQuestion: Question?
   

@@ -10,9 +10,10 @@ import Foundation
 
 let questionList = [
     Question(context: "Who are you?", id: 0, type: QuestionType.SingleSelection),
-    Question(context: "Who am I?", id: 1, type: QuestionType.SingleSelection),
+    Question(context: "Who am I?", id: 1, type: QuestionType.TextField),
     Question(context: "What are you going to do?", id: 2, type: QuestionType.SingleSelection),
-    Question(context: "What should be the best practice?", id: 3, type: QuestionType.SingleSelection)
+    Question(context: "What should be the best practice?", id: 3, type: QuestionType.SingleSelection),
+    Question(context: "Complete", id: 4, type: QuestionType.End)
 ]
 
 let candidateList = [
@@ -50,7 +51,9 @@ let candidateList = [
     // Question 3
     // 1 Answer
     Candidate(context: "A. Test oriented", id: 8)
-        .registerOnQuestion(on: questionList[3]),
+        .registerOnQuestion(on: questionList[3])
+        .registerNextQuestion(nextQuestion: questionList[4]),
     Candidate(context: "B. Everything interface", id: 9)
         .registerOnQuestion(on: questionList[3])
+        .registerNextQuestion(nextQuestion: questionList[4])
 ]

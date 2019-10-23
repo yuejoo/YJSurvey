@@ -28,20 +28,22 @@ struct SelectedModifier: ViewModifier {
 }
 
 struct CandidatesContextView : View {
-    var candidate : Candidate
+    @ObservedObject var candidate : Candidate
     var questionType : QuestionType
     var isSelected : Bool
 
     var body: some View {
         return VStack {
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .shadow(radius: 2)
-                    .frame(height: 60)
-                    .foregroundColor(Color.white)
-                Text(candidate.context).padding()
-                    .foregroundColor(.black)
-            }.modifier(SelectedModifier(isSelected: isSelected))
+            if questionType == QuestionType.SingleSelection {
+                ZStack(alignment: .leading) {
+                    Rectangle()
+                        .shadow(radius: 2)
+                        .frame(height: 60)
+                        .foregroundColor(Color.white)
+                    Text(candidate.context).padding()
+                        .foregroundColor(.black)
+                }.modifier(SelectedModifier(isSelected: isSelected))
+            }
         }
     }
 }
