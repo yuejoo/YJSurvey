@@ -8,10 +8,26 @@
 * Rating scales. (Slider)
 * Likert scales. (TODO)
 * Matrix questions (TODO)
+## Input
+
+* QuestionList[]
+* SelectionList[]
+* QuestionAnswerListMapping
+* QuestionType
+
 
 ## Models
 
 ```
+enume QuestionType {
+    case MultipleSelection
+    case SingleSelection
+    case Openend
+    case RatingScale
+    case likertscale
+}
+
+
 interface Question {
     int id
     String context
@@ -46,4 +62,15 @@ class Record {
     void record(QuestionId, SelectedAnswer)
 }
 
+
+class Quiz {
+    var questions : [Questions]
+    var answers : [Answers]
+    var head : Question
+    var records
+}
 ```
+
+## Process
+
+
