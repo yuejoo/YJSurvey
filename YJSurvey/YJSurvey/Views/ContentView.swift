@@ -29,8 +29,7 @@ struct ContentView: View {
                     ),
                     questionType: questionList[0].type,
                     selectedCandidates: ObservableArray<Candidate>(
-                        array: [
-                        ]
+                        array: []
                     )
                 ),
                 headQuestion: questionList[0]

@@ -13,6 +13,7 @@ enum QuestionType {
     case MultipleSelection // TODO
     case TextField
     case RatingScale // TODO
-    case Start
+    case DatePicker
+    case Start // TODO
     case End
 }

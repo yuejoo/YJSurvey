@@ -10,7 +10,7 @@ import Foundation
 
 let questionList = [
     Question(context: "Who are you?", id: 0, type: QuestionType.SingleSelection),
-    Question(context: "Who am I?", id: 1, type: QuestionType.TextField),
+    Question(context: "Who am I?", id: 1, type: QuestionType.DatePicker),
     Question(context: "What are you going to do?", id: 2, type: QuestionType.SingleSelection),
     Question(context: "What should be the best practice?", id: 3, type: QuestionType.SingleSelection),
     Question(context: "Complete", id: 4, type: QuestionType.End)
@@ -39,17 +39,16 @@ let candidateList = [
         .registerNextQuestion(nextQuestion: questionList[2]),
     
     // Question 2
-    // 1 Answer
+    // 2 Answers
     Candidate(context: "A. Play Java", id: 6)
         .registerOnQuestion(on: questionList[2])
         .registerNextQuestion(nextQuestion: questionList[3]),
     Candidate(context: "B. Play Swift", id: 7)
         .registerOnQuestion(on: questionList[2])
         .registerNextQuestion(nextQuestion: questionList[3]),
-    
-    
+
     // Question 3
-    // 1 Answer
+    // 2 Answers
     Candidate(context: "A. Test oriented", id: 8)
         .registerOnQuestion(on: questionList[3])
         .registerNextQuestion(nextQuestion: questionList[4]),

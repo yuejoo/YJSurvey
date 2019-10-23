@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 func printAnswers(answer: Answer?) {
     var head : Answer? = answer
@@ -99,9 +100,17 @@ struct BottomBarView: View {
     }
 }
 
+let dateFormatter : DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    return dateFormatter
+}()
+
+
 struct QuestionSheetView: View {
     @ObservedObject var questionSheetManager: QuestionSheetManager
     @State var textField: String = ""
+    @State var datePicker: Date = Date()
 
     var headQuestion : Question
 
@@ -142,6 +151,21 @@ struct QuestionSheetView: View {
                }
             }
             
+            // DatePickerView
+            if questionSheetManager.questionType == QuestionType.DatePicker {
+                DatePicker("", selection: self.$questionSheetManager.candidates.array[0].date, displayedComponents: .date)
+                    .datePickerStyle(DefaultDatePickerStyle())
+                    .onReceive(self.questionSheetManager.candidates.array[0].$date) { (publisher) in
+                        let candidate = self.questionSheetManager.candidates.array[0]
+                        candidate.context = dateFormatter.string(from: candidate.date)
+                        self.questionSheetManager.selectedCandidates = ObservableArray<Candidate>(
+                            array: [candidate]
+                        )
+                        self.updateAnswer()
+                    }
+            }
+
+            // EndView
             if questionSheetManager.questionType == QuestionType.End {
                 EndView()
             }

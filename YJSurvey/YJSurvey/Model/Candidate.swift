@@ -11,6 +11,7 @@ import Combine
 
 class Candidate : ObservableObject {
     @Published public var context: String
+    @Published public var date: Date = Date() //
     public let id: Int
     public var nextQuestion: Question?
   
