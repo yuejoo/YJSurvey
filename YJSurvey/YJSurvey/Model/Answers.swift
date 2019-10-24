@@ -19,3 +19,15 @@ public class Answer {
         self.selectedCandidates = selectedCandidates
     }
 }
+
+extension Answer: Hashable {
+    public func hash(into hasher: inout Hasher) {
+         hasher.combine(ObjectIdentifier(self).hashValue)
+    }
+}
+
+extension Answer: Equatable {
+    public static func ==(lhs: Answer, rhs: Answer) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
+}

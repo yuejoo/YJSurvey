@@ -127,6 +127,7 @@
 		77ECDEB4235D851A0089BCA1 /* YJSurvey */ = {
 			isa = PBXGroup;
 			children = (
+				77ECDEB9235D851A0089BCA1 /* ContentView.swift */,
 				77ECDEF123603CC70089BCA1 /* Views */,
 				77ECDEF023603C1E0089BCA1 /* Manager */,
 				77ECDEE5235D8DC40089BCA1 /* Model */,
@@ -192,7 +193,6 @@
 		77ECDEF123603CC70089BCA1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				77ECDEB9235D851A0089BCA1 /* ContentView.swift */,
 				77ECDEF323603CE40089BCA1 /* QuestionContextView.swift */,
 				77ECDEF523603D6E0089BCA1 /* QuestionContext.swift */,
 				77ECDEFB2360428B0089BCA1 /* CandidateContextView.swift */,

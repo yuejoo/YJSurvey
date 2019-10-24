@@ -11,8 +11,8 @@ import SwiftUI
 struct ContentView: View {
 
     var quiz = Quiz(
-        title: "Profile",
-        details: "Test",
+        title: "How well do you know twice?",
+        details: "DEMO",
         questions: questionList,
         candidates: candidateList,
         questionHead: questionList[0]

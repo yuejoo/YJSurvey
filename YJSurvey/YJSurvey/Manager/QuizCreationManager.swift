@@ -9,50 +9,62 @@
 import Foundation
 
 let questionList = [
-    Question(context: "Who are you?", id: 0, type: QuestionType.MultipleSelection),
-    Question(context: "Who am I?", id: 1, type: QuestionType.RatingScale),
-    Question(context: "What are you going to do?", id: 2, type: QuestionType.SingleSelection),
-    Question(context: "What should be the best practice?", id: 3, type: QuestionType.SingleSelection),
+    Question(context: "In which date did TWICE debut?", id: 0, type: QuestionType.DatePicker),
+    Question(context: "Who is the Leader of TWICE?", id: 1, type: QuestionType.SingleSelection),
+    Question(context: "How many memebers are there in TWICE?", id: 2, type: QuestionType.RatingScale),
+    Question(context: "Which member are not Korean? (Multiple Choices)", id: 3, type: QuestionType.MultipleSelection),
     Question(context: "Complete", id: 4, type: QuestionType.End)
 ]
 
 let candidateList = [
     // Question 0
-    // 4 Answers
-    Candidate(context: "A. David", id: 1)
+    // 1 Answer ()
+    Candidate(context: "Empty Date", id: 1)
         .registerOnQuestion(on: questionList[0])
         .registerNextQuestion(nextQuestion: questionList[1]),
-    Candidate(context: "B. James", id: 2)
-        .registerOnQuestion(on: questionList[0])
-        .registerNextQuestion(nextQuestion: questionList[1]),
-    Candidate(context: "C. Green", id: 3)
-        .registerOnQuestion(on: questionList[0])
-        .registerNextQuestion(nextQuestion: questionList[1]),
-    Candidate(context: "D. 走走", id: 4)
-        .registerOnQuestion(on: questionList[0])
-        .registerNextQuestion(nextQuestion: questionList[2]),
     
     // Question 1
-    // 1 Answer
-    Candidate(context: "走走", id: 5, ratingConfig: RatingConfig(defaultRating: 0, minRating: 0, maxRating: 10, step: 1))
+    // 4 Answers
+    Candidate(context: "Nayeon", id: 1)
+        .registerOnQuestion(on: questionList[1])
+        .registerNextQuestion(nextQuestion: questionList[2]),
+    Candidate(context: "Jeongyeon", id: 2)
+        .registerOnQuestion(on: questionList[1])
+        .registerNextQuestion(nextQuestion: questionList[2]),
+    Candidate(context: "Jihyo", id: 3)
+        .registerOnQuestion(on: questionList[1])
+        .registerNextQuestion(nextQuestion: questionList[2]),
+    Candidate(context: "Dahyun", id: 4)
+        .registerOnQuestion(on: questionList[1])
+        .registerNextQuestion(nextQuestion: questionList[2]),
+    Candidate(context: "Chaeyoung", id: 5)
         .registerOnQuestion(on: questionList[1])
         .registerNextQuestion(nextQuestion: questionList[2]),
     
     // Question 2
-    // 2 Answers
-    Candidate(context: "A. Play Java", id: 6)
+    // 1 Answer
+    Candidate(context: "Rating", id: 1, ratingConfig: RatingConfig(defaultRating: 1, minRating: 1, maxRating: 11, step: 1))
         .registerOnQuestion(on: questionList[2])
         .registerNextQuestion(nextQuestion: questionList[3]),
-    Candidate(context: "B. Play Swift", id: 7)
-        .registerOnQuestion(on: questionList[2])
-        .registerNextQuestion(nextQuestion: questionList[3]),
-
+    
     // Question 3
-    // 2 Answers
-    Candidate(context: "A. Test oriented", id: 8)
+    // 4 Answers
+    Candidate(context: "Momo", id: 1)
         .registerOnQuestion(on: questionList[3])
         .registerNextQuestion(nextQuestion: questionList[4]),
-    Candidate(context: "B. Everything interface", id: 9)
+    Candidate(context: "Dahyun", id: 2)
         .registerOnQuestion(on: questionList[3])
-        .registerNextQuestion(nextQuestion: questionList[4])
+        .registerNextQuestion(nextQuestion: questionList[4]),
+    Candidate(context: "Mina", id: 3)
+        .registerOnQuestion(on: questionList[3])
+        .registerNextQuestion(nextQuestion: questionList[4]),
+    Candidate(context: "Sana", id: 4)
+        .registerOnQuestion(on: questionList[3])
+        .registerNextQuestion(nextQuestion: questionList[4]),
+    
+    
+    // Question 4
+    // 2 Answers
+    Candidate(context: "Results", id: 8)
+        .registerOnQuestion(on: questionList[4])
 ]

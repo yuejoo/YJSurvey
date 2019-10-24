@@ -9,19 +9,6 @@
 import SwiftUI
 import Combine
 
-func printAnswers(answer: Answer?) {
-    var head : Answer? = answer
-    while head?.prev != nil {
-        head = head!.prev
-    }
-    
-    while head?.next != nil {
-        print(head!.question.context + " " + head!.selectedCandidates[0].context)
-        head = head!.next
-    }
-    
-}
-
 struct BottomBarView: View {
     @ObservedObject var questionSheetManager: QuestionSheetManager
     
@@ -77,7 +64,6 @@ struct BottomBarView: View {
                 emptyAnswer.prev = self.questionSheetManager.answer!
                 self.questionSheetManager.answer = emptyAnswer
             }
-            printAnswers(answer: self.questionSheetManager.answer)
         }
     }
     
@@ -186,7 +172,7 @@ struct QuestionSheetView: View {
 
             // EndView
             if questionSheetManager.questionType == QuestionType.End {
-                EndView()
+                EndView(answer: self.questionSheetManager.answer)
             }
             Spacer()
             BottomBarView(questionSheetManager: self.questionSheetManager)
