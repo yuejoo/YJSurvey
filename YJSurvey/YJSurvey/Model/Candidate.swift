@@ -6,12 +6,15 @@
 //  Copyright © 2019 zhaoye. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
 class Candidate : ObservableObject {
     @Published public var context: String
-    @Published public var date: Date = Date()
+    @Published public var date: Date = Date() // Used for datepicker
+    @Published public var rating: CGFloat = 0 // Used for ratingScaler
+    public var ratingConfig: RatingConfig?
+
     public let id: Int
     public var nextQuestion: Question?
   
@@ -28,6 +31,12 @@ class Candidate : ObservableObject {
     init(context: String, id: Int) {
         self.context = context
         self.id = id
+    }
+    
+    init(context: String, id: Int, ratingConfig: RatingConfig?) {
+        self.context = context
+        self.id = id
+        self.ratingConfig = ratingConfig
     }
 }
 

@@ -110,7 +110,6 @@ let dateFormatter : DateFormatter = {
 struct QuestionSheetView: View {
     @ObservedObject var questionSheetManager: QuestionSheetManager
     @State var textField: String = ""
-    @State var datePicker: Date = Date()
 
     var headQuestion : Question
 
@@ -121,7 +120,7 @@ struct QuestionSheetView: View {
                 questionContext: self.questionSheetManager.questionContext
             )
             // SelectionView
-            if questionSheetManager.questionType == QuestionType.SingleSelection {
+            if questionSheetManager.questionType == QuestionType.SingleSelection || questionSheetManager.questionType == QuestionType.MultipleSelection {
                 ForEach(self.questionSheetManager.candidates.array, id:\.self){
                     candidate in CandidatesContextView(
                         candidate: candidate,
@@ -164,6 +163,26 @@ struct QuestionSheetView: View {
                         self.updateAnswer()
                     }
             }
+            
+            // RatingScaleView
+            if questionSheetManager.questionType == QuestionType.RatingScale {
+                VStack {
+                    Slider(
+                        value: self.$questionSheetManager.candidates.array[0].rating,
+                        in: self.questionSheetManager.candidates.array[0].ratingConfig!.minRating...self.questionSheetManager.candidates.array[0].ratingConfig!.maxRating,
+                        step: self.questionSheetManager.candidates.array[0].ratingConfig!.step,
+                        onEditingChanged: { (edit) in
+                            let candidate = self.questionSheetManager.candidates.array[0]
+                            candidate.context = "\(self.questionSheetManager.candidates.array[0].rating)"
+                            self.questionSheetManager.selectedCandidates = ObservableArray<Candidate>(
+                                array: [candidate]
+                            )
+                            self.updateAnswer()
+                        }
+                    )
+                    Text("\(self.questionSheetManager.candidates.array[0].rating)")
+                }.padding()
+            }
 
             // EndView
             if questionSheetManager.questionType == QuestionType.End {
@@ -186,9 +205,25 @@ struct QuestionSheetView: View {
     func selectionTapped(_ candidate: Candidate) {
         if !isSelected(candidate) {
             if self.questionSheetManager.questionType == QuestionType.SingleSelection {
-    
                 self.questionSheetManager.selectedCandidates = ObservableArray<Candidate>(
                     array: [candidate]
+                )
+            }
+            if self.questionSheetManager.questionType == QuestionType.MultipleSelection {
+                var new_array = self.questionSheetManager.selectedCandidates.array
+                new_array.append(candidate)
+                self.questionSheetManager.selectedCandidates = ObservableArray<Candidate>(
+                    array: new_array
+                )
+            }
+            updateAnswer()
+        }
+        else {
+            if self.questionSheetManager.questionType == QuestionType.MultipleSelection {
+                var new_array = self.questionSheetManager.selectedCandidates.array
+                new_array.removeAll{$0 == candidate}
+                self.questionSheetManager.selectedCandidates = ObservableArray<Candidate>(
+                    array: new_array
                 )
                 updateAnswer()
             }

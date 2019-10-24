@@ -9,8 +9,8 @@
 import Foundation
 
 let questionList = [
-    Question(context: "Who are you?", id: 0, type: QuestionType.SingleSelection),
-    Question(context: "Who am I?", id: 1, type: QuestionType.DatePicker),
+    Question(context: "Who are you?", id: 0, type: QuestionType.MultipleSelection),
+    Question(context: "Who am I?", id: 1, type: QuestionType.RatingScale),
     Question(context: "What are you going to do?", id: 2, type: QuestionType.SingleSelection),
     Question(context: "What should be the best practice?", id: 3, type: QuestionType.SingleSelection),
     Question(context: "Complete", id: 4, type: QuestionType.End)
@@ -34,7 +34,7 @@ let candidateList = [
     
     // Question 1
     // 1 Answer
-    Candidate(context: "走走", id: 5)
+    Candidate(context: "走走", id: 5, ratingConfig: RatingConfig(defaultRating: 0, minRating: 0, maxRating: 10, step: 1))
         .registerOnQuestion(on: questionList[1])
         .registerNextQuestion(nextQuestion: questionList[2]),
     

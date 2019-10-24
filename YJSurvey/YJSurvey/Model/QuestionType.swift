@@ -10,9 +10,9 @@ import Foundation
 
 enum QuestionType {
     case SingleSelection
-    case MultipleSelection // TODO
+    case MultipleSelection
     case TextField
-    case RatingScale // TODO
+    case RatingScale
     case DatePicker
     case Start // TODO
     case End

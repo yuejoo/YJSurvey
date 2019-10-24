@@ -22,17 +22,14 @@ struct ContentView: View {
         VStack {
             QuestionSheetView(
                 questionSheetManager: QuestionSheetManager(
-                    questionContext: QuestionContext(context: questionList[0].context
-                    ),
+                    questionContext: QuestionContext(context: self.quiz.questionHead.context),
                     candidates: ObservableArray<Candidate>(
-                        array: questionList[0].candidates
+                        array: self.quiz.questionHead.candidates
                     ),
-                    questionType: questionList[0].type,
-                    selectedCandidates: ObservableArray<Candidate>(
-                        array: []
-                    )
+                    questionType: self.quiz.questionHead.type,
+                    selectedCandidates: ObservableArray<Candidate>(array: [])
                 ),
-                headQuestion: questionList[0]
+                headQuestion: self.quiz.questionHead
             )
         }
     }

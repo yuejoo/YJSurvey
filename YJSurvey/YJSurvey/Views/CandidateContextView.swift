@@ -34,7 +34,7 @@ struct CandidatesContextView : View {
 
     var body: some View {
         return VStack {
-            if questionType == QuestionType.SingleSelection {
+            if questionType == QuestionType.SingleSelection || questionType == QuestionType.MultipleSelection {
                 ZStack(alignment: .leading) {
                     Rectangle()
                         .shadow(radius: 2)
