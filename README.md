@@ -7,4 +7,8 @@ The simple functional UI for survey/quiz purpose. Implemented based on SwiftUI.
 * Open-ended questions (Textfield)
 * Rating scales. (Slider)
 
-## DEMO
+## Demo
+![image](https://github.com/yuejoo/YJSurvey/blob/master/DEMO.gif)
+
+## Licences
+MIT
